@@ -7,10 +7,11 @@ use App\Models\Person;
 use App\Models\Period;
 use App\Models\Payment;
 use App\Models\PersonProperty;
+use App\Models\Condonation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class PaymentsController extends Controller
+class CondonationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,6 +20,7 @@ class PaymentsController extends Controller
      */
      public function index(Request $request )
      {
+      
        $lot_number = $request->lot_number;
        $document_number = $request->document_number;
        $name = $request->person_name;
@@ -49,7 +51,7 @@ class PaymentsController extends Controller
         $lot_number = $request->lot_number;
         $persons = Person::Search($request->name,$request->document_number,0)->paginate(4);
         return View(
-            "Payments.index",
+            "Condonations.index",
             compact(
                 'persons',
                 'properties',
@@ -59,26 +61,6 @@ class PaymentsController extends Controller
             ));
      }
 
-     public function createCondonation($propertyId){
-       dd($propertyId);
-       //Con el propertyId vamos a buscar los PAGOS
-       // con las siguientes condiciones:
-       // 1. La fecha desde debe ser igual 01/01/2010
-       // 2. Debe tener fecha hasta que termine fin de mes por ejemplo 31/12/2015
-       // 3. El tipo de propiedad debe ser terreno
-       // Los prosesos  que se va a realizar son:
-       // 1. Con el propertyId Consultamos todos los PAGOS
-       // 2. Sacamos la fecha minima y maxima de los PAGOS
-       // 3. Contamos el numero de cuaotas pendientes
-       // 4. Consultamos del propitario y numero de lote
-       return View("Payments.condonation");
-     }
-
-
-     public function storeCondonation(Request $request){
-
-       return View("Payments.index");
-     }
 
     /**
      * Store a newly created resource in storage.
@@ -88,6 +70,29 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
+      $periods= $request->active;
+      
+        $totalcuotas = 0;
+
+        //$strConsulta='select
+       // lot_number, month_name, month_id,value,payment_value,
+       // year, period_id
+        //from paymentsview where value is not null  and property_id = ' . $request->property_id;
+        
+        //$payments = DB::select($strConsulta);
+
+        //$strConsulta='select sum(value) as total
+        //from paymentsview where value is not null  and property_id = ' . $request->property_id;
+        //$totalPayments = DB::select($strConsulta);
+
+        $totalcuotas= count($request->active);
+        $condonationValue = $request->condonationValue;
+
+        $cuotaAbono = round(($condonationValue / $totalcuotas),2);
+
+        $valorAjuste = round($condonationValue - ($cuotaAbono * $totalcuotas),2);
+        //dd($valorAjuste);
+
         // $result_value=DB::Table('properties')
         // ->join('aliquot_values','aliquot_values.property_type_id','=','properties.property_type_id')
         // ->select('aliquot_values.value')
@@ -96,24 +101,52 @@ class PaymentsController extends Controller
         $transaction_id = time();
 
         $periods = $request->active;
+        DB::beginTransaction();
+        try{
 
-        //dd($periods);
-        foreach ($periods as $period) {
+          foreach ($periods as $period) {
             list($periodo_id,$valor_cuata) = (explode("-", $period));
-            //dd($periodo_id);
-            $payment = new Payment();
-            $payment->property_id = $request->property_id;
-            $payment->user_id = \Auth::user()->id;
-            $payment->transaction_id = $transaction_id;
-            $payment->transaction_parent_id = 0;
-            $payment->value = $valor_cuata;//$result_value->value;
-            $payment->active = true;
-            $payment->period_id = $periodo_id;
-            //dd($payment);
-            $payment->save();
+              $valorCuotaAjuste = 0.0;
+              if ($valorAjuste >0){
+                $valorCuotaAjuste = round($cuotaAbono + 0.01,2);
+                $valorAjuste = round($valorAjuste - 0.01,2);
+              }
+              else if ($valorAjuste < 0){
+                $valorCuotaAjuste = round($cuotaAbono - 0.01,2);
+                $valorAjuste = round($valorAjuste + 0.01,2);
+              }
+              else {
+                $valorCuotaAjuste = $cuotaAbono;
+              }
+              $payment = new Payment();
+              $payment->property_id = $request->property_id;
+              $payment->user_id = \Auth::user()->id;
+              $payment->transaction_id = $transaction_id;
+              $payment->transaction_parent_id = 0;
+              $payment->value = $valorCuotaAjuste;//$result_value->value;
+              $payment->active = true;
+              $payment->period_id =  $periodo_id;
+              //dd($payment);
+              $payment->save();
+
+          }
+
+          $condonation = new Condonation();
+          $condonation->user_id = \Auth::user()->id;
+          $condonation->transaction_id = $transaction_id;
+          $condonation->note =$request->condonationReason;
+          $condonation->value=$request->condonationValue;
+          $condonation->save();
+
+          flash("Pago Grabado correctamente. Transacción: ".$transaction_id)->success();
         }
-        flash("Pago Grabado correctamente. Transacción: ".$transaction_id)->success();
-        return redirect()->route('Payments.index');
+        catch(Exception $ex)
+        {
+             DB::rollBack();
+             flash('Condonación no fue Creada.', 'info')->important();
+        }
+        DB::commit();
+        return redirect()->route('Condonations.index');
     }
 
 
@@ -158,10 +191,10 @@ class PaymentsController extends Controller
           from paymentsview';
 
       if( $person_id > 0 && $property_id > 0 ){
-          $strConsulta .= ' where payment_value is null ';
+          $strConsulta .= ' where';
 
           if ($person_id > 0) {
-              $strConsulta = $strConsulta . ' and person_id = ' . $person_id;
+              $strConsulta = $strConsulta . ' person_id = ' . $person_id;
           }
           if ($property_id > 0) {
               $strConsulta = $strConsulta . ' and property_id = ' . $property_id;
@@ -179,7 +212,5 @@ class PaymentsController extends Controller
     function GetPeriods(){
         return Period::distinct()->pluck('year','year');
     }
-
-
 
 }

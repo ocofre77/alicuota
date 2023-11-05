@@ -16,4 +16,19 @@ return [
     'important'                     => 'Importante',
     'warning'                       => 'Advertencia',
     'information'                   => 'Información',
+
+    'reports'                       => 'REPORTES',
+    'report_payments'                => 'Pagos',
+    'report_receivable'             => 'Cartera',
+    'payments'                => 'Pagos',
+
+    'security_settings'                       => 'SEGURIDAD',
+    'users'                => 'Usuario',
+    'roles'             => 'Roles',
+    'periods'             => 'Periodos',
+    'aliquotValues'             => 'Valores Alicuotas',
+    'company_name'             => 'Datos Urbanización',
+
+    'options'             => 'OPCIONES',
+
 ];

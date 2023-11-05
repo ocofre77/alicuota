@@ -18,6 +18,7 @@
 </head>
 <body>
     <div id="app">
+        @include('flash-message')
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -76,5 +77,17 @@
             @yield('content')
         </main>
     </div>
+
+    @section('customScript')
+
+    @show
+    
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        $(document).ready(function(){
+            $('form').attr('autocomplete', 'off');
+        });
+    </script>
+
 </body>
 </html>
