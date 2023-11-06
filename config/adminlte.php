@@ -334,7 +334,7 @@ return [
 
         [
             'text' => 'report_payments',
-            'url'  => 'admin/settings',
+            'route'  => 'ReportsController.totalPayments',
             'icon' => 'fa fa-solid fa-chart-simple',
         ],
         [

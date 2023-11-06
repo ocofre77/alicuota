@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonsController;
 use App\Http\Controllers\PropertiesController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\AliquotValuesController;
+use App\Http\Controllers\CondonationsController;
+use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\PeriodsController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,45 +43,51 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('Properties',PropertiesController::class);
     Route::resource('Payments',PaymentsController::class)->only(['index','store']);
 
-    // Route::resource('AliquotValues',AliquotValuesController::class);
+    Route::resource('AliquotValues',AliquotValuesController::class);
 
-    // Route::resource('Condonations',CondonationsController::class)->only(['index','store']);
-    // Route::resource('Companies',CompaniesController::class)->only(['index','update','edit','store']);
+    Route::resource('Condonations',CondonationsController::class)->only(['index','store']);
+    Route::resource('Companies',CompaniesController::class)->only(['index','update','edit','store']);
 
-    // Route::resource('Periods',PeriodsController::class)->only(['index','store']);
+    Route::resource('Periods',PeriodsController::class)->only(['index','store']);
 
-    // Route::get('/Payments/{propertyId}/createCondonation', [
-    //                 'uses' => 'PaymentsController@createCondonation',
-    //                 'as' => 'Payments.createCondonation'
-    //         ]
-    // );
-    // Route::post('/Payments/{propertyId}/storeCondonation', [
-    //                 'uses' => 'PaymentsController@storeCondonation',
-    //                 'as' => 'Payments.storeCondonation'
-    //         ]
-    // );
+    Route::get(
+        '/Payments/{propertyId}/createCondonation', 
+        [PaymentsController::class,'createCondonation']
+    )->name('Payments.createCondonation'); 
 
-    // Route::get('/AliquotValues/{id}/destroy', [
-  	// 				'uses' => 'AliquotValuesController@destroy',
-  	// 				'as' => 'AliquotValues.destroy'
-  	// 		]
-  	// );
 
-	// Route::get('/Persons/{id}/destroy', [
-	// 				'uses' => 'PersonsController@destroy',
-	// 				'as' => 'Persons.destroy'
-	// 		]
-	// );
-    // Route::get('/Persons/{id}/properties', [
-	// 				'uses' => 'PersonsController@properties',
-	// 				'as' => 'Persons.properties'		]
-	// );
+    Route::post(
+        '/Payments/{propertyId}/storeCondonation', 
+        [PaymentsController::class,'storeCondonation']
+    )->name('Payments.storeCondonation'); 
 
-    Route::get('/Properties/{id}/create', [
-                    'uses' => 'PropertiesController@create',
-                    'as' => 'Properties.create'
-            ]
-    );
+
+    Route::get(
+        '/AliquotValues/{id}/destroy', 
+        [AliquotValuesController::class,'destroy']
+    )->name('AliquotValues.destroy'); 
+
+    
+    Route::get(
+        '/Persons/{id}/destroy', 
+        [PersonsController::class,'destroy']
+    )->name('Persons.destroy'); 
+
+    Route::get(
+        '/Persons/{id}/properties', 
+        [PersonsController::class,'properties']
+    )->name('Persons.properties'); 
+
+    Route::get(
+        '/Persons/{id}/properties', 
+        [PersonsController::class,'properties']
+    )->name('Persons.properties'); 
+
+    Route::get(
+        '/Properties/{id}/create', 
+        [PropertiesController::class,'create']
+    )->name('Properties.create');
+
     // Route::get('Properties/{Property}/{Person}/edit',[
     //     'uses' => 'PropertiesController@edit',
     //     'as' => 'Properties.edit'
@@ -117,17 +128,36 @@ Route::group(['middleware' => 'auth'], function () {
     //     'as' => 'Reports.exportPayments'
     // ]);
 
-    // Route::get('/PortofolioExcel',[
-    //     'uses'=> 'ReportsController@exportPorfolioReceivable',
-    //     'as' => 'Reports.exportPorfolioReceivable'
-    // ]);
 
-    // Route::get('/CondonationExcel',[
-    //     'uses'=> 'ReportsController@exportCondonation',
-    //     'as' => 'Reports.exportCondonation'
-    // ]);
+    Route::get('/TotalPayments', 
+        [ReportsController::class, 'totalPayments']
+    )->name('ReportsController.totalPayments');
 
 
+    Route::get('/TotalPortfolio', 
+        [ReportsController::class, 'totalPorfolioReceivable']
+    )->name('ReportsController.totalPorfolioReceivable');
+
+
+    Route::get('/TotalCondonation', 
+        [ReportsController::class, 'totalCondonation']
+    )->name('ReportsController.totalCondonation');
+
+
+    Route::get(
+        '/PaymentsExcel', 
+        [ReportsController::class,'exportPayments']
+    )->name('Reports.exportPayments');
+
+    Route::get(
+        '/PortofolioExcel', 
+        [ReportsController::class,'exportPorfolioReceivable']
+    )->name('Reports.exportPorfolioReceivable');
+
+    Route::get(
+        '/CondonationExcel', 
+        [ReportsController::class,'exportCondonation']
+    )->name('Reports.exportCondonation');
 
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes

@@ -84,21 +84,21 @@
                       <td>{{ $person->cell_phone }}</td>
                       <td class="hidden-xs">{{ $person->address}}</td>
                       <td>
-						   @permission('edit-auth-persons')
+						   <!-- @permission('edit-auth-persons') -->
 							<a alt="Editar" href="{{ route('Persons.edit', $person->id )}}" type="button" class="btn btn-xs btn-warning">
 								<i class="fa fa-pencil" aria-hidden="true"></i>
 							</a>
-							@endpermission
+							<!-- @endpermission -->
 							<a alt="Propiedades" href="{{ route('Properties.index', [ 'id' => $person->id] )}}" type="button" class="btn btn-xs btn-info ">
 								<i class="fa fa-home" aria-hidden="true"></i>
 							</a>
-							@permission('delete-auth-persons')
+							<!-- @permission('delete-auth-persons') -->
 							<a href="" alt="Borrar" type="button"
 								data-href="{{ route('Persons.destroy', $person->id )}}"
 								class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#confirm-delete">
 								<i class="fa fa-trash" aria-hidden="true"></i>
 							</a>
-							@endpermission
+							<!-- @endpermission -->
                       </td>
                   </tr>
                 @endforeach
