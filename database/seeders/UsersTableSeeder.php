@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -38,6 +39,8 @@ class UsersTableSeeder extends Seeder
 
         DB::Table('users')->insert($users);
 
-        //factory(App\Models\User::class)->times(5)->create();
+        // factory(App\Models\User::class)->times(50)->create();
+        User::factory()->count(30000)->create();
+
     }
 }
