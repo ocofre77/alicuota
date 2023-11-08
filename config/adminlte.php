@@ -329,66 +329,56 @@ return [
             'icon'        => 'fa fa-fw fa-home',
         ],
 
-
-        ['header' => 'reports'],
-
         [
-            'text' => 'report_payments',
-            'route'  => 'ReportsController.totalPayments',
-            'icon' => 'fa fa-solid fa-chart-simple',
-        ],
-        [
-            'text' => 'report_receivable',
-            'url'  => 'admin/settings',
-            'icon' => 'fa fa-solid fa-chart-pie',
-        ],
-
-
-        // ['header' => 'account_settings'],
-
-        // [
-        //     'text' => 'profile',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-user',
-        // ],
-        // [
-        //     'text' => 'change_password',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-lock',
-        // ],
-
-
-        ['header' => 'security_settings'],
-
-
-        [
-            'text' => 'users',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'roles',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text'    => 'repports',
+            'icon'    => 'fas fa-fw fa-book',
+            'submenu' => [
+                            [
+                                'text' => 'report_payments',
+                                'route'  => 'ReportsController.totalPayments',
+                                'icon' => 'fa fa-solid fa-chart-simple',
+                            ],
+                            [
+                                'text' => 'report_receivable',
+                                'url'  => 'admin/settings',
+                                'icon' => 'fa fa-solid fa-chart-pie',
+                            ],
+                        ],
         ],
 
         [
-            'text' => 'periods',
-            'url'  => 'admin/settings',
-            'icon' => 'fa fa-fw fa-calendar',
-        ],
-        [
-            'text' => 'aliquotValues',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'company_name',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+            'text'    => 'security_settings',
+            'icon'    => 'fas fa-fw fa-lock',
+            'submenu' => [
 
+                            [
+                                'text' => 'users',
+                                'url'  => 'admin/settings',
+                                'icon' => 'fas fa-fw fa-user',
+                            ],
+                            [
+                                'text' => 'roles',
+                                'url'  => 'admin/settings',
+                                'icon' => 'fas fa-fw fa-lock',
+                            ],
 
+                            [
+                                'text' => 'periods',
+                                'route'  => 'Periods.index',
+                                'icon' => 'fa fa-fw fa-calendar',
+                            ],
+                            [
+                                'text' => 'aliquotValues',
+                                'url'  => 'admin/settings',
+                                'icon' => 'fas fa-fw fa-lock',
+                            ],
+                            [
+                                'text' => 'company_name',
+                                'url'  => 'admin/settings',
+                                'icon' => 'fas fa-fw fa-lock',
+                            ],
+                ],
+            ],
     ],
 
     /*

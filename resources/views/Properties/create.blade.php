@@ -1,11 +1,11 @@
+
 @extends('adminlte::page')
+
 @section('title', 'AdminLTE')
 
-@section('contentheader_title')
-    Crear Propiedad
-@endsection
+@section('content_header')
 
-@section('main-content')
+@section('content')
  @if(count($errors) > 0)
 	<div class="alert alert-danger" role="alert">
 		 <ul>
@@ -82,7 +82,7 @@
 
 								<a class="btn btn-labeled btn-default" href="#" onclick="window.history.back();">
 						      <span class="btn-label"><i class="fa fa-chevron-left"></i></span>
-						      {{ trans('entrust-gui::button.cancel') }}
+						      Cancelar
 						    </a>
 
             </div>

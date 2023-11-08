@@ -5,6 +5,12 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+use App\Models\Property;
+
 class PropertiesTableSeeder extends Seeder
 {
     /**
@@ -13,6 +19,7 @@ class PropertiesTableSeeder extends Seeder
     public function run()
     {
          DB::Table('properties')->delete();
-         factory(App\Property::class)->times(250)->create();
+
+         Property::factory()->count(400)->create(); 
     }
 }

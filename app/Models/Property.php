@@ -25,7 +25,7 @@ class Property extends Model
 
     public function property_type()
     {
-        return $this->belongsTo('App\PropertyType');
+        return $this->belongsTo('App\Models\PropertyType');
     }
 
 
