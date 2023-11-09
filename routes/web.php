@@ -10,6 +10,7 @@ use App\Http\Controllers\CondonationsController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\PeriodsController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\auth\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('/Persons/{Person}/destroy', [PersonsController::class, 'destroy']);
 
 
+    Route::resource('Users', UserController::class);
+    
     Route::resource('Persons', PersonsController::class);
+
     Route::resource('Properties',PropertiesController::class);
     Route::resource('Payments',PaymentsController::class)->only(['index','store']);
 

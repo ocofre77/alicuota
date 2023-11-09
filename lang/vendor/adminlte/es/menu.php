@@ -17,17 +17,19 @@ return [
     'warning'                       => 'Advertencia',
     'information'                   => 'Información',
 
-    'reports'                       => 'REPORTES',
+    'reports'                       => 'Reporte',
     'report_payments'                => 'Pagos',
     'report_receivable'             => 'Cartera',
     'payments'                => 'Pagos',
 
-    'security_settings'                       => 'SEGURIDAD',
+    'security_settings'                       => 'Seguridad',
     'users'                => 'Usuario',
     'roles'             => 'Roles',
     'periods'             => 'Periodos',
     'aliquotValues'             => 'Valores Alicuotas',
     'company_name'             => 'Datos Urbanización',
+    'condonations'       =>'Condonaciones',
+    
 
     'options'             => 'OPCIONES',
 

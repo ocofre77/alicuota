@@ -324,17 +324,27 @@ return [
             'icon'        => 'fa far fa-money-bill',
         ],
         [
+            'text'        => 'condonations',
+            'route'         => 'Condonations.index',
+            'icon'        => 'fa far fa-money-bill',
+        ],
+        [
             'text'        => 'Propiedades',
             'route'         => 'Properties.index',
             'icon'        => 'fa fa-fw fa-home',
         ],
 
         [
-            'text'    => 'repports',
+            'text'    => 'reports',
             'icon'    => 'fas fa-fw fa-book',
             'submenu' => [
                             [
                                 'text' => 'report_payments',
+                                'route'  => 'ReportsController.totalPayments',
+                                'icon' => 'fa fa-solid fa-chart-simple',
+                            ],
+                            [
+                                'text' => 'condonations',
                                 'route'  => 'ReportsController.totalPayments',
                                 'icon' => 'fa fa-solid fa-chart-simple',
                             ],
@@ -374,7 +384,7 @@ return [
                             ],
                             [
                                 'text' => 'company_name',
-                                'url'  => 'admin/settings',
+                                'route'  => 'Companies.index',
                                 'icon' => 'fas fa-fw fa-lock',
                             ],
                 ],

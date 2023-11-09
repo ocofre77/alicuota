@@ -12,7 +12,6 @@
 	</div>
 @stop
 
-
 @section('new_button')
 @endsection
 
