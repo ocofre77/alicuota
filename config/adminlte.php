@@ -293,23 +293,23 @@ return [
         // Navbar items:
         // [
         //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
+            //     'text'         => 'search',
+            //     'topnav_right' => true,
         // ],
         // [
         //     'type'         => 'fullscreen-widget',
-        //     'topnav_right' => true,
+            //     'topnav_right' => true,
         // ],
 
         // // Sidebar items:
         // [
         //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
+            //     'text' => 'search',
         // ],
         // [
         //     'text' => 'blog',
-        //     'url'  => 'admin/blog',
-        //     'can'  => 'manage-blog',
+            //     'url'  => 'admin/blog',
+            //     'can'  => 'manage-blog',
         // ],
         ['header' => 'options'],
 
@@ -321,7 +321,7 @@ return [
         [
             'text'        => 'payments',
             'route'         => 'Payments.index',
-            'icon'        => 'fa far fa-money-bill',
+        'icon'        => 'fa far fa-money-bill',
         ],
         [
             'text'        => 'condonations',
@@ -338,57 +338,57 @@ return [
             'text'    => 'reports',
             'icon'    => 'fas fa-fw fa-book',
             'submenu' => [
-                            [
-                                'text' => 'report_payments',
-                                'route'  => 'ReportsController.totalPayments',
+                [
+                    'text' => 'report_payments',
+                    'route'  => 'ReportsController.totalPayments',
                                 'icon' => 'fa fa-solid fa-chart-simple',
-                            ],
-                            [
-                                'text' => 'condonations',
-                                'route'  => 'ReportsController.totalPayments',
-                                'icon' => 'fa fa-solid fa-chart-simple',
-                            ],
-                            [
-                                'text' => 'report_receivable',
-                                'url'  => 'admin/settings',
-                                'icon' => 'fa fa-solid fa-chart-pie',
-                            ],
-                        ],
+                ],
+                [
+                    'text' => 'condonations',
+                    'route'  => 'ReportsController.totalPayments',
+                    'icon' => 'fa fa-solid fa-chart-simple',
+                ],
+                [
+                    'text' => 'report_receivable',
+                    'url'  => 'admin/settings',
+                        'icon' => 'fa fa-solid fa-chart-pie',
+                ],
+            ],
         ],
 
         [
             'text'    => 'security_settings',
             'icon'    => 'fas fa-fw fa-lock',
             'submenu' => [
-
-                            [
-                                'text' => 'users',
-                                'url'  => 'admin/settings',
-                                'icon' => 'fas fa-fw fa-user',
-                            ],
-                            [
-                                'text' => 'roles',
-                                'url'  => 'admin/settings',
-                                'icon' => 'fas fa-fw fa-lock',
-                            ],
-
-                            [
-                                'text' => 'periods',
-                                'route'  => 'Periods.index',
-                                'icon' => 'fa fa-fw fa-calendar',
-                            ],
-                            [
-                                'text' => 'aliquotValues',
-                                'url'  => 'admin/settings',
-                                'icon' => 'fas fa-fw fa-lock',
-                            ],
-                            [
-                                'text' => 'company_name',
-                                'route'  => 'Companies.index',
-                                'icon' => 'fas fa-fw fa-lock',
-                            ],
+                [
+                    'text' => 'users',
+                    'route'  => 'Users.index',
+                    'icon' => 'fas fa-fw fa-user',
                 ],
+                [
+                    'text' => 'roles',
+                    'url'  => 'admin/settings',
+                                'icon' => 'fas fa-fw fa-lock',
+                ],
+                [
+                    'text' => 'periods',
+                    'route'  => 'Periods.index',
+                    'icon' => 'fa fa-fw fa-calendar',
+                ],
+                [
+                    'text' => 'aliquotValues',
+                    'route'  => 'AliquotValues.index',
+                    'icon' => 'fas fa-fw fa-lock',
+                ],
+                [
+                    'text' => 'company_name',
+                    'route'  => 'Companies.index',
+                    'icon' => 'fas fa-fw fa-lock',
+                ],
+                
             ],
+        ],
+        
     ],
 
     /*

@@ -1,10 +1,13 @@
-@extends('adminlte::layouts.app')
+
+@extends('adminlte::page')
+
+@section('title', 'AdminLTE')
 
 @section('contentheader_title')
 	 Reporte Pagos
 @endsection
 
-@section('main-content')
+@section('content')
 <div class="box">
 	<div class="box-header ">
 

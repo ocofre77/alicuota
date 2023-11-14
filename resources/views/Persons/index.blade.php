@@ -17,9 +17,9 @@
 
 
 @section('content')
-	<!-- Default box -->
-	<div class="box box-success">
-		<div class="box-header with-border">
+
+	<div class="card">
+		<div class="card-header with-border">
 			{!! Form::open([ 'method' =>'GET', 'class' => '','id' => 'frm_person_type']) !!}
 				<div class="row">
 					<div class="col-sm-2">
@@ -59,10 +59,7 @@
 				</div>
 				{!! Form::close() !!}
 		</div>
-		    <!-- /.box-header -->
-
-
-	    <div class="box-body">
+		<div class="card-body">
 	          <table class="table table-bordered table-hover">
               <thead>
 				<th>Tipo</th>
@@ -85,7 +82,7 @@
                       <td>
 						   <!-- @permission('edit-auth-persons') -->
 							<a alt="Editar" href="{{ route('Persons.edit', $person->id )}}" type="button" class="btn btn-xs btn-warning">
-								<i class="fa fa-pencil" aria-hidden="true"></i>
+								<i class="fas fa-edit" aria-hidden="true"></i>
 							</a>
 							<!-- @endpermission -->
 							<a alt="Propiedades" href="{{ route('Properties.index', [ 'id' => $person->id] )}}" type="button" class="btn btn-xs btn-info ">
@@ -106,11 +103,9 @@
 		  <!-- Paginado -->
 	      {{ $persons->appends(request()->input())->links() }}
 		 <!-- Fin Paginado -->
-		<!-- /.box-body -->
 		</div>
-	<!-- /.box -->
-    </div>
 
+	</div>
 
 	<!-- Modal -->
     <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -134,7 +129,8 @@
           </div>
         </div>
       </div>
-    </div>	
+    </div>
+
 @endsection
 @section('customScript')
 <script type="text/javascript">

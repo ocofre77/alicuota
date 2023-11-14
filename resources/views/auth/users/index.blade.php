@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 @section('title', 'AdminLTE')
 @section('content_header')
-    <!-- <h1 class="m-0 text-dark">Personas</h1>
+  <h1 class="m-0 text-dark">Personas</h1>
 	<div class="pull-right">
 		<a href="{{url('Persons/create')}}" type="button" class="btn btn-primary">
 			<i class="fa fa-plus" aria-hidden="true"></i> Agregar
 		</a>
-	</div> -->
+	</div>
 @stop
 
 @section('new_button')
@@ -58,9 +58,8 @@
         </table>
         {{ $users->appends(request()->input())->links() }}
     </div>
+@stop
 
-
-@endsection
 @section('customScript')
 <script type="text/javascript">
   $(document).ready(function(){

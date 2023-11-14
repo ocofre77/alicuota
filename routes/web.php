@@ -115,6 +115,10 @@ Route::group(['middleware' => 'auth'], function () {
 	// 		]
 	// );
 
+    Route::get('/TotalPayments', [ReportsController::class, 'totalPayments']);
+    Route::get('/TotalPortfolio', [ReportsController::class, 'totalPorfolioReceivable']);
+    
+
     // Route::get('/TotalPortfolio', [
 	// 				'uses' => 'ReportsController@totalPorfolioReceivable',
 	// 				'as' => 'ReportsController.totalPorfolioReceivable'

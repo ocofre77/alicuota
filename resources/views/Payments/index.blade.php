@@ -4,18 +4,8 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Dashboard</h1>
+    <h1 class="m-0 text-dark">Registro de Pagos</h1>
 @stop
-
-@section('content')
-
-
-
-
-
-{{-- @section('contentheader_title')
-	 Registro de Pagos
-@endsection --}}
 
 @section('content')
 		<div class="row">
@@ -149,8 +139,8 @@
 												@if ( $payment->payment_value > 0 )
 												<span class="bg-green-active color-palette">PAGADO</span>
 												@else
-												<span>NO</span>
-												{!! Form::checkbox('active[]',$payment->period_id."-".$payment->value, 0) !!}
+												<span class="badge badge-info">NO</span>
+													{!! Form::checkbox('active[]',$payment->period_id."-".$payment->value, 0) !!}
 												@endif
 											</td>
 										</tr>
@@ -186,23 +176,23 @@
 
 <!-- begin modal -->
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
+<div id="myModal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Información</h4>
+        <h5 class="modal-title">Información</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
-        <p>No se encontro registros pedientes</p>
+	  <p>No se encontro registros pedientes</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+		<button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -212,57 +202,57 @@
 
 @endsection
 
-@section('customScript')
-  <script type="text/javascript">
+@push('js')
 
-	// Restricts input for each element in the set of matched elements to the given inputFilter.
+<script type="text/javascript">
 
-	$(document).ready(function(){
+$(document).ready(function(){
 
-		$("#lot_number").inputFilter(function(value) {
-		  return /^\d*$/.test(value);
-		});
+$("#lot_number").inputFilter(function(value) {  return /^\d*$/.test(value);});
 
-	});
+});
 
-    $('#confirm-delete').on('show.bs.modal', function(e) {
-      $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+$('#confirm-delete').on('show.bs.modal', function(e) {
+$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 
-      $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
-    });
+$('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+});
 
-		var tblProperties = $("#tblProperties");
-		var tblPayments = $("#tblPayments");
+var tblProperties = $("#tblProperties");
+var tblPayments = $("#tblPayments");
 
-		$("#btnAceptPayment").on('click',function(event){
-			$("#formPayment").submit();
-		});
+$("#btnAceptPayment").on('click',function(event){
+//event.preventDefault();
+//if( ) 
+$("#formPayment").submit();
+});
 
-	$("#btnPayment").on('click',function(event){
-		event.preventDefault();
-	    if( tblProperties[0] != undefined && tblPayments.find('input[type=checkbox]:checked').length > 0 ){
+$("#btnPayment").on('click',function(event){
+event.preventDefault();
+if( tblProperties[0] != undefined && tblPayments.find('input[type=checkbox]:checked').length > 0 ){
 
-				var items = tblPayments.find('input[type=checkbox]:checked');//.find('td');
-				var tableConfirmation = $("<table class='table table-bordered table-hover'><thead><th>Año</th><th>Mes</th><th>Valor</th></thead><tbody></tbody></table>");
-				var total = 0.0;
+	var items = tblPayments.find('input[type=checkbox]:checked');//.find('td');
+	var tableConfirmation = $("<table class='table table-bordered table-hover'><thead><th>Año</th><th>Mes</th><th>Valor</th></thead><tbody></tbody></table>");
+	var total = 0.0;
 
-				for (var i = 0; i < items.length; i++){
-					var rows = $(items[i]).parent().parent().find('td');
-					total = total + parseFloat(rows[2].innerText);
-					tableConfirmation.append('<tr><td>' + rows[0].innerText + '</td><td>'+ rows[1].innerText + '</td><td>' + rows[2].innerText + '</td></tr>'  );
-				}
+	for (var i = 0; i < items.length; i++){
+		var rows = $(items[i]).parent().parent().find('td');
+		total = total + parseFloat(rows[2].innerText);
+		tableConfirmation.append('<tr><td>' + rows[0].innerText + '</td><td>'+ rows[1].innerText + '</td><td>' + rows[2].innerText + '</td></tr>'  );
+	}
 
-				tableConfirmation.append('<tfoot><tr><td><b>TOTAL</b></td><td></td><td><b>' + total.toFixed(2) + '</b></td></tr></tfoot>'  );
+	tableConfirmation.append('<tfoot><tr><td><b>TOTAL</b></td><td></td><td><b>' + total.toFixed(2) + '</b></td></tr></tfoot>'  );
 
-				$("#confirmPayment").find(".detalle").html('');
-				$("#confirmPayment").find(".detalle").append(tableConfirmation);
-	      $("#confirmPayment").modal();
-	    }
-	    else {
-	        $("#myModal").modal();
-	    }
-	    return false;
-	})
+	$("#confirmPayment").find(".detalle").html('');
+	$("#confirmPayment").find(".detalle").append(tableConfirmation);
+	  $("#confirmPayment").modal();
+}
+else {
+	$("#myModal").modal();
+}
+return false;
+})
 
-  </script>
-@endsection
+</script>
+
+@endpush

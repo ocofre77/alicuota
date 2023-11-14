@@ -1,5 +1,7 @@
-@extends('adminlte::layouts.app')
 
+@extends('adminlte::page')
+
+@section('title', 'AdminLTE')
 @section('contentheader_title')
 	 Reportes de Pagos
 @endsection
@@ -8,7 +10,7 @@
 
 @endsection
 
-@section('main-content')
+@section('content')
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 
 <div class="box">
@@ -44,6 +46,7 @@
 @endsection
 
 @section('customScript')
+
 
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 

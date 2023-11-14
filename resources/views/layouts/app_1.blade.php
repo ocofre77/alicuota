@@ -14,11 +14,10 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/js/payment.js'])
 </head>
 <body>
-    <div id="app">
-        @include('flash-message')
+    <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -72,22 +71,24 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
+        <main class="py-4" style="border:red solid 1px; background-color:navy" >
+            @include('flash-message')
+            <p>fin de archivo</p>
+            @yield('contento')
         </main>
     </div>
 
-    @section('customScript')
+   
 
+    @section('scripts')
+        @include('adminlte::layouts.partials.scripts')
     @show
-    
+
     <script>
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
         $(document).ready(function(){
             $('form').attr('autocomplete', 'off');
         });
     </script>
-
 </body>
 </html>

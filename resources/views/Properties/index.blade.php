@@ -16,7 +16,7 @@
 			<i class="fa fa-plus" aria-hidden="true"></i> Agregar
 		</a>
 	</div>
-@endsection
+@stop
 
 
 @section('content')
@@ -62,7 +62,7 @@
 							<td>{{ $property->address }}</td>
 							<td>
 								<a href="{{ route('Properties.edit', [$property->id, (($person)?$person->id:0) ])}}" type="button" class="btn btn-xs btn-warning">
-									<i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+									<i class="fa fa-edit" aria-hidden="true"></i> Editar</a>
 								<a href="" alt="Borrar" data-href="{{ route('Properties.destroy', $property->id )}}"
 									type="button" class="btn btn-xs btn-danger"
 									data-toggle="modal" data-target="#confirm-delete">
