@@ -74,7 +74,10 @@
 				</tbody>
 			</table>
 			<!-- Paginado -->
-			{{ $properties->links() }}
+			<div class="d-flex justify-content-center">
+				{!! $properties->links() !!}
+			</div>
+
 			<!-- Fin Paginado -->
 
 			@else

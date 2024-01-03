@@ -26,6 +26,7 @@ class PersonsController extends Controller
 
 
         return view("Persons.index", compact('persons','person_types','person_name','document_number','person_type_id'));
+        
     }
 
     /**

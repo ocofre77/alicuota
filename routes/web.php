@@ -12,6 +12,8 @@ use App\Http\Controllers\PeriodsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\auth\UserController;
 
+use App\Http\Controllers\BlogController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -118,6 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/TotalPayments', [ReportsController::class, 'totalPayments']);
     Route::get('/TotalPortfolio', [ReportsController::class, 'totalPorfolioReceivable']);
     
+    Route::get('/TotalUser', [ReportsController::class, 'totalUser']);
 
     // Route::get('/TotalPortfolio', [
 	// 				'uses' => 'ReportsController@totalPorfolioReceivable',
@@ -167,11 +170,19 @@ Route::group(['middleware' => 'auth'], function () {
         [ReportsController::class,'exportCondonation']
     )->name('Reports.exportCondonation');
 
+    Route::get(
+        '/ReportsPaymentsData', [ReportsController::class,'paymentsData']
+    )->name('Reports.paymentsData');
+
+
+    Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
+
+
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
 
-
+ 
 
 Auth::routes();
 

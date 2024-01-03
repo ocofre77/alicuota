@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Prados del Condado</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -345,7 +345,7 @@ return [
                 ],
                 [
                     'text' => 'condonations',
-                    'route'  => 'ReportsController.totalPayments',
+                    'route'  => 'ReportsController.totalPorfolioReceivable',
                     'icon' => 'fa fa-solid fa-chart-simple',
                 ],
                 [

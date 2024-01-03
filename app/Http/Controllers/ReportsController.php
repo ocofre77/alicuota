@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use App\Models\Period;
 use App\Models\PersonType;
-use Excel;
+//use Excel;
+use Halalsoft\FastExcel\FastExcel;
 
 class ReportsController extends Controller
 {
@@ -52,6 +53,14 @@ class ReportsController extends Controller
         $years = $this->GetPeriods();
         $person_types=PersonType::pluck('name','id');
         return $dataTable->render('Reports.totalPorfolioReceivable',compact('years','person_types'));
+    }
+
+    public function totalUser(UsersDataTable $dataTable)
+    {
+        $years = $this->GetPeriods();
+        $person_types=PersonType::pluck('name','id');
+        dd($dataTable);
+        return $dataTable->render('Reports.totalUser',compact('years','person_types'));
     }
 
     public function GetPeriods(){
@@ -108,7 +117,7 @@ class ReportsController extends Controller
       $strConsulta='select
         lot_number,year,person_name,person_type_name,date_from,date_to,
         ENE,FEB,MAR,ABR,MAY,JUN,JUL,AGO,SEP,OCT,NOV,DIC,TOTAL
-        from payment_view';
+        from payments_views';
 
       $validYear = ($request->has('year') && $request->get('year') != "" );
       $validPersonType = ($request->has('person_type_id') && $request->get('person_type_id') != "" );

@@ -2,7 +2,7 @@
 @extends('adminlte::page')
 
 @section('contentheader_title')
-	 Registro de Condonaciones
+	 <h1 class="m-0 text-dark">Registro de Condonaciones</h1>
 @endsection
 
 @section('content')
@@ -173,8 +173,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+	    <h4 class="modal-title" id="myModalLabel"><b>Confirmar Pago</b></h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><b>Confirmar Pago</b></h4>
       </div>
       <div class="modal-body">
         <p class="detalle"></p>
@@ -194,8 +194,8 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
+	  	<h4 class="modal-title">Información</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Información</h4>
       </div>
       <div class="modal-body">
         <p>El motivo y valor de condonación son obligatorios</p>
@@ -213,7 +213,7 @@
 
 @endsection
 
-@section('customScript')
+@section('js')
   <script type="text/javascript">
 
 		var tblProperties = $("#tblProperties");

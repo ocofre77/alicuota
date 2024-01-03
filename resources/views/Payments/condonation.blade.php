@@ -1,10 +1,13 @@
-@extends('adminlte::layouts.app')
+@extends('adminlte::page')
 
-@section('contentheader_title')
-	 Registro de Condonacion
-@endsection
+@section('title', 'AdminLTE')
 
-@section('main-content')
+@section('content_header')
+    <h1 class="m-0 text-dark">Registro de Condonacion</h1>
+@stop
+
+
+@section('content')
 		<div class="row">
 		        <!-- left column -->
 		        <div class="col-md-12">

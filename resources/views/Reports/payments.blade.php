@@ -1,13 +1,8 @@
 
 @extends('adminlte::page')
-
-@section('title', 'AdminLTE')
-@section('contentheader_title')
+@section('title', 'Prados del Condado')
+@section('content_header')
 	 Reportes de Pagos
-@endsection
-
-@section('contentheader_description')
-
 @endsection
 
 @section('content')
@@ -45,11 +40,15 @@
 
 @endsection
 
-@section('customScript')
-
+@section('css')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 
+
+@endsection
+
+
+@section('js')
 
 <!--
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
@@ -66,16 +65,24 @@
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+{{-- <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script> --}}
+
+
+@endsection
+
+@push('js')
+
 
 
 	<script type="text/javascript">
 
 		 $(document).ready(function() {
+
+			alert('hola ecuador');
 
 
 			 		var oTable = $('#payments-table').DataTable({
@@ -83,7 +90,7 @@
 			 	        //     "<'row'<'col-xs-12't>>"+
 			 	        //     "<'row'<'col-xs-12'<'col-xs-6'i><'col-xs-6'p>>>",
 			 				 dom: 'Bfrtip',
-			 				buttons: [ 'csv', 'excel', 'pdf', 'print' ],
+			 				//buttons: [ 'csv', 'excel', 'pdf', 'print' ],
 
 			              processing: true,
 			 		     serverSide: true,
@@ -108,14 +115,15 @@
 			 		 });
 
 
-			 	     $('#search-form').on('submit', function(e) {
-			 	         oTable.draw();
-			 	         e.preventDefault();
-			 	     });
+			 	    //  $('#search-form').on('submit', function(e) {
+			 	    //      oTable.draw();
+			 	    //      e.preventDefault();
+			 	    //  });
 
 
 		 } );
 
 
 	 </script>
-@endsection
+
+@endpush
